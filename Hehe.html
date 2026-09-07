@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SKHAR × CHINGGIS</title>
+<meta name="theme-color" content="#0a0a0a">
+<style>
+*{box-sizing:border-box}
+:root{
+  --black:#090909;
+  --black2:#141414;
+  --white:#fffef7;
+  --yellow:#ffd400;
+  --purple:#7c3cff;
+  --purple2:#b493ff;
+  --muted:#b7b7b7;
+}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  color:var(--white);
+  background:
+    radial-gradient(circle at 85% 0%,rgba(124,60,255,.28),transparent 30%),
+    radial-gradient(circle at 5% 20%,rgba(255,212,0,.10),transparent 28%),
+    #090909;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+}
+a{color:inherit}
+.wrap{width:min(92%,960px);margin:auto}
+.top{
+  position:sticky;top:0;z-index:20;
+  background:rgba(9,9,9,.86);
+  border-bottom:1px solid rgba(255,255,255,.10);
+  backdrop-filter:blur(14px);
+}
+.topin{
+  width:min(94%,960px);margin:auto;
+  height:62px;display:flex;align-items:center;justify-content:space-between
+}
+.logo{font-weight:900;letter-spacing:-.04em}
+.logo b{color:var(--yellow)}
+.badge{
+  font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  color:#111;background:var(--yellow);padding:7px 9px;border-radius:999px
+}
+.hero{
+  min-height:90svh;
+  display:grid;grid-template-columns:1.05fr .95fr;gap:28px;
+  align-items:center;padding:54px 0 48px
+}
+.kicker{
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--yellow);font-weight:900
+}
+h1{
+  font-size:clamp(58px,11vw,112px);
+  line-height:.82;letter-spacing:-.075em;margin:10px 0 20px
+}
+h1 .x{color:var(--purple)}
+.lead{font-size:18px;line-height:1.55;color:#d9d9d9;max-width:560px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.btn{
+  appearance:none;border:0;border-radius:999px;padding:14px 18px;
+  font-weight:900;cursor:pointer;text-decoration:none;display:inline-block
+}
+.btn.yellow{background:var(--yellow);color:#111}
+.btn.white{background:#fff;color:#111}
+.btn.purple{background:var(--purple);color:#fff}
+.btn.outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.18)}
+.poster{
+  border:1px solid rgba(255,255,255,.12);
+  background:linear-gradient(160deg,#191919,#0e0e0e);
+  border-radius:34px;padding:16px;box-shadow:0 30px 80px rgba(0,0,0,.5)
+}
+.posterinner{
+  min-height:410px;border-radius:24px;
+  border:1px solid rgba(255,255,255,.08);
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:22px;
+  background:
+    linear-gradient(140deg,rgba(255,212,0,.18),rgba(124,60,255,.28)),
+    repeating-linear-gradient(45deg,#111 0 14px,#181818 14px 28px);
+}
+.star{font-size:74px;color:var(--yellow);line-height:1}
+.bigline{font-size:30px;font-weight:900;line-height:1.0;letter-spacing:-.04em}
+.smallline{font-size:11px;color:#ddd;letter-spacing:.14em;text-transform:uppercase;margin-top:12px}
+.section{padding:84px 0}
+.head{display:flex;gap:14px;align-items:flex-start;margin-bottom:26px}
+.num{
+  flex:0 0 40px;width:40px;height:40px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.18);display:grid;place-items:center;
+  color:var(--yellow);font-weight:900
+}
+.eyebrow{margin:0 0 7px;color:#999;font-size:11px;letter-spacing:.17em;text-transform:uppercase}
+h2{margin:0;font-size:clamp(38px,7vw,66px);letter-spacing:-.055em;line-height:.9}
+.panel{
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:28px;padding:22px;
+  background:linear-gradient(145deg,rgba(255,212,0,.06),rgba(124,60,255,.08));
+}
+.uploadgrid{display:grid;grid-template-columns:.8fr 1.2fr;gap:16px}
+.drop{
+  min-height:240px;border:1.5px dashed rgba(255,255,255,.24);
+  border-radius:22px;background:#0e0e0e;display:grid;place-items:center;text-align:center;
+  padding:22px;cursor:pointer
+}
+.drop strong{font-size:24px;display:block;margin-bottom:8px}
+.drop span{font-size:12px;color:#999;line-height:1.5}
+.file{display:none}
+.form{display:flex;flex-direction:column;gap:11px}
+.input,.area{
+  width:100%;border-radius:16px;border:1px solid rgba(255,255,255,.12);
+  background:#0b0b0b;color:#fff;padding:14px;outline:none
+}
+.area{min-height:116px;resize:vertical}
+.gallery{margin-top:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{
+  border:1px solid rgba(255,255,255,.11);border-radius:20px;overflow:hidden;background:#111
+}
+.card img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;background:#222}
+.cardbody{padding:13px}
+.cardbody h3{margin:0 0 6px;font-size:16px}
+.cardbody p{margin:0 0 11px;color:#aaa;font-size:12px;line-height:1.45}
+.cardactions{display:flex;gap:7px;flex-wrap:wrap}
+.mini{
+  border:1px solid rgba(255,255,255,.13);background:#090909;color:#fff;
+  border-radius:999px;padding:7px 9px;font-size:10px;cursor:pointer
+}
+.empty{
+  grid-column:1/-1;border:1px dashed rgba(255,255,255,.12);
+  border-radius:18px;padding:30px;text-align:center;color:#777
+}
+.notegrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.note{
+  text-align:left;border:1px solid rgba(255,255,255,.12);background:#111;color:#fff;
+  border-radius:20px;padding:18px;cursor:pointer;font-weight:900
+}
+.note:nth-child(odd){box-shadow:inset 4px 0 0 var(--yellow)}
+.note:nth-child(even){box-shadow:inset 4px 0 0 var(--purple)}
+.random{
+  text-align:center;border-radius:30px;padding:42px 22px;
+  background:radial-gradient(circle at 50% 0%,rgba(124,60,255,.28),transparent 38%),#080808;
+  border:1px solid rgba(255,255,255,.12)
+}
+.randomout{min-height:56px;display:grid;place-items:center;color:#ddd;font-size:19px;line-height:1.5;margin-top:12px}
+.tools{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+.tool{border:1px solid rgba(255,255,255,.11);background:#0e0e0e;border-radius:20px;padding:17px}
+.tool h3{margin:0 0 7px;font-size:17px}
+.tool p{margin:0 0 13px;color:#999;font-size:12px;line-height:1.5}
+footer{text-align:center;padding:46px 0 90px;color:#888}
+footer strong{display:block;color:#fff;font-size:28px;margin-bottom:8px}
+dialog{
+  width:min(90vw,470px);border:1px solid rgba(255,255,255,.12);
+  background:#0d0d0d;color:#fff;border-radius:24px;padding:26px;
+  box-shadow:0 30px 90px rgba(0,0,0,.65)
+}
+dialog::backdrop{background:rgba(0,0,0,.75);backdrop-filter:blur(4px)}
+.close{position:absolute;right:13px;top:9px;background:none;border:0;color:#fff;font-size:28px;cursor:pointer}
+.dk{font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:var(--yellow);font-weight:900}
+dialog h3{font-size:29px;margin:10px 0}
+dialog p{color:#d0d0d0;line-height:1.6}
+.toast{
+  position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(18px);
+  opacity:0;background:white;color:#111;padding:10px 14px;border-radius:999px;font-size:11px;
+  font-weight:900;transition:.2s;z-index:40
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:760px){
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .posterinner{min-height:300px}
+  .uploadgrid{grid-template-columns:1fr}
+  .gallery{grid-template-columns:1fr 1fr}
+  .tools{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .gallery{grid-template-columns:1fr}
+  .notegrid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="topin">
+    <div class="logo">SKHAR <b>×</b> CHINGGIS</div>
+    <div class="badge">DESIGN V3</div>
+  </div>
+</div>
+
+<main class="wrap">
+  <section class="hero">
+    <div>
+      <div class="kicker">our tiny digital universe</div>
+      <h1>same chaos.<br><span class="x">different</span><br>timezone.</h1>
+      <p class="lead">Photos, notes, stupid little memories and everything distance is not allowed to erase.</p>
+      <div class="actions">
+        <a href="#gallery" class="btn yellow">add memory</a>
+        <button class="btn outline" onclick="shareSite()">share site</button>
+      </div>
+    </div>
+
+    <div class="poster">
+      <div class="posterinner">
+        <div class="star">✦</div>
+        <div>
+          <div class="bigline">SKHAR × CHINGGIS<br>ARCHIVE</div>
+          <div class="smallline">MONGOLIA ↔ CHINA / forever online</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery" class="section">
+    <div class="head">
+      <div class="num">01</div>
+      <div>
+        <p class="eyebrow">memory vault</p>
+        <h2>save the evidence</h2>
+      </div>
+    </div>
+
+    <div class="panel uploadgrid">
+      <label class="drop" for="photoInput">
+        <div>
+          <strong>＋ choose photo</strong>
+          <span>Tap here to pick a photo from your phone</span>
+        </div>
+      </label>
+
+      <div class="form">
+        <input id="photoInput" class="file" type="file" accept="image/*">
+        <input id="titleInput" class="input" type="text" maxlength="60" placeholder="memory title">
+        <textarea id="captionInput" class="area" maxlength="240" placeholder="caption / date / inside joke"></textarea>
+        <button class="btn yellow" onclick="saveMemory()">save memory</button>
+      </div>
+    </div>
+
+    <div id="galleryGrid" class="gallery"></div>
+
+    <div class="tools">
+      <div class="tool">
+        <h3>Export</h3>
+        <p>Save all memories from this device as a backup file.</p>
+        <button class="btn white" onclick="exportMemories()">export</button>
+      </div>
+      <div class="tool">
+        <h3>Import</h3>
+        <p>Restore a backup from another device.</p>
+        <input id="importInput" class="file" type="file" accept=".json,application/json">
+        <button class="btn purple" onclick="document.getElementById('importInput').click()">import</button>
+      </div>
+      <div class="tool">
+        <h3>Share</h3>
+        <p>Send this website through Messages, Telegram or AirDrop.</p>
+        <button class="btn yellow" onclick="shareSite()">share</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="head">
+      <div class="num">02</div>
+      <div>
+        <p class="eyebrow">open when</p>
+        <h2>you need me</h2>
+      </div>
+    </div>
+
+    <div class="notegrid">
+      <button class="note" data-note="mongolia">you miss Mongolia</button>
+      <button class="note" data-note="bad">you had a terrible day</button>
+      <button class="note" data-note="lonely">you feel lonely</button>
+      <button class="note" data-note="birthday">it’s your birthday</button>
+      <button class="note" data-note="funny">you forgot how funny we are</button>
+      <button class="note" data-note="far">China feels too far away</button>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="random">
+      <p class="eyebrow">emergency friendship button</p>
+      <h2>PRESS WHEN YOU MISS ME</h2>
+      <button class="btn yellow" style="margin-top:22px" onclick="randomMessage()">press me ♡</button>
+      <div id="randomOutput" class="randomout">I am literally trapped inside this button.</div>
+    </div>
+  </section>
+
+  <footer>
+    <strong>same people. different country.</strong>
+    SKHAR × CHINGGIS / DESIGN V3
+  </footer>
+</main>
+
+<dialog id="noteDialog">
+  <button class="close" onclick="noteDialog.close()">×</button>
+  <div class="dk">OPEN WHEN...</div>
+  <h3 id="noteTitle"></h3>
+  <p id="noteText"></p>
+</dialog>
+
+<div id="toast" class="toast"></div>
+
+<script>
+const KEY="skhar_chinggis_v3";
+let selectedImage="";
+
+const notes={
+  mongolia:["you miss Mongolia","Look at one old photo and remember this place is still yours. I miss you too, idiot."],
+  bad:["you had a terrible day","Today does not get to become your whole life. Eat, sleep, complain to me, then try again tomorrow."],
+  lonely:["you feel lonely","Different country, same friendship. Distance is logistical. It is not emotional."],
+  birthday:["it’s your birthday","Congratulations on surviving another year of being absolutely ridiculous."],
+  funny:["you forgot how funny we are","We have repeatedly made normal situations unnecessarily funny. Permanent skill."],
+  far:["China feels too far away","Far away is still reachable. Open this page, look at us, and remember you still have me."]
+};
+
+const randoms=[
+  "Send me one photo with zero context.",
+  "You owe me one piece of gossip.",
+  "Take a photo right now. Future us will want it.",
+  "Same chaos. Different timezone.",
+  "Text me: emergency friendship meeting.",
+  "Pick one old photo of us and send it to me.",
+  "Go get a snack and pretend I ordered you to.",
+  "I miss your face. Annoying, but true.",
+  "Come back here whenever you need a tiny piece of home."
+];
+
+function toast(msg){
+  const t=document.getElementById("toast");
+  t.textContent=msg;t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),1600);
+}
+
+document.getElementById("photoInput").addEventListener("change",e=>{
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=()=>{selectedImage=r.result;toast("photo ready ✦")};
+  r.readAsDataURL(f);
+});
+
+function getAll(){
+  try{return JSON.parse(localStorage.getItem(KEY))||[]}catch{return[]}
+}
+function setAll(a){
+  try{localStorage.setItem(KEY,JSON.stringify(a));return true}
+  catch{alert("Browser storage is full.");return false}
+}
+function saveMemory(){
+  if(!selectedImage){alert("Choose a photo first ♡");return}
+  const title=document.getElementById("titleInput").value.trim()||"untitled memory";
+  const caption=document.getElementById("captionInput").value.trim();
+  const a=getAll();a.unshift({id:Date.now(),title,caption,image:selectedImage});
+  if(setAll(a)){
+    selectedImage="";
+    photoInput.value="";titleInput.value="";captionInput.value="";
+    render();toast("memory saved ♡")
+  }
+}
+function esc(s){
+  return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]))
+}
+function render(){
+  const a=getAll(),g=document.getElementById("galleryGrid");
+  if(!a.length){g.innerHTML='<div class="empty">No memories yet. Add the first one above ✦</div>';return}
+  g.innerHTML=a.map(m=>`
+  <article class="card">
+    <img src="${m.image}" alt="${esc(m.title)}">
+    <div class="cardbody">
+      <h3>${esc(m.title)}</h3>
+      <p>${esc(m.caption||"no caption")}</p>
+      <div class="cardactions">
+        <button class="mini" onclick="downloadMemory(${m.id})">download</button>
+        <button class="mini" onclick="shareMemory(${m.id})">share</button>
+        <button class="mini" onclick="deleteMemory(${m.id})">delete</button>
+      </div>
+    </div>
+  </article>`).join("")
+}
+function deleteMemory(id){
+  if(!confirm("Delete this memory from this device?"))return;
+  setAll(getAll().filter(x=>x.id!==id));render()
+}
+function downloadMemory(id){
+  const m=getAll().find(x=>x.id===id);if(!m)return;
+  const a=document.createElement("a");a.href=m.image;a.download="memory.jpg";a.click()
+}
+async function shareMemory(id){
+  const m=getAll().find(x=>x.id===id);if(!m)return;
+  try{
+    const res=await fetch(m.image),blob=await res.blob();
+    const file=new File([blob],"memory.jpg",{type:blob.type||"image/jpeg"});
+    if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){
+      await navigator.share({title:m.title,text:m.caption,files:[file]})
+    }else downloadMemory(id)
+  }catch{downloadMemory(id)}
+}
+function exportMemories(){
+  const blob=new Blob([JSON.stringify(getAll())],{type:"application/json"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);a.download="SKHAR-CHINGGIS-backup.json";a.click()
+}
+document.getElementById("importInput").addEventListener("change",e=>{
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=()=>{
+    try{
+      const incoming=JSON.parse(r.result);
+      if(!Array.isArray(incoming))throw 0;
+      const merged=[...incoming,...getAll()];
+      const unique=[...new Map(merged.map(x=>[x.id,x])).values()];
+      setAll(unique);render();toast("imported ✦")
+    }catch{alert("Could not read backup file.")}
+  };
+  r.readAsText(f)
+});
+async function shareSite(){
+  const data={title:"SKHAR × CHINGGIS",text:"our tiny digital universe",url:location.href};
+  if(navigator.share){try{await navigator.share(data)}catch{}}
+  else{navigator.clipboard.writeText(location.href);toast("link copied")}
+}
+document.querySelectorAll(".note").forEach(b=>{
+  b.onclick=()=>{
+    const n=notes[b.dataset.note];
+    noteTitle.textContent=n[0];noteText.textContent=n[1];noteDialog.showModal()
+  }
+});
+function randomMessage(){randomOutput.textContent=randoms[Math.floor(Math.random()*randoms.length)]}
+render();
+</script>
+</body>
+</html>
